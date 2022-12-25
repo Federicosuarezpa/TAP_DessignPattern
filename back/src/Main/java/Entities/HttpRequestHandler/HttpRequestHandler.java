@@ -26,7 +26,6 @@ public class HttpRequestHandler implements HttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        System.out.println("asd" + exchange.getRequestHeaders()+exchange.getRequestMethod());
         HttpRequest httpRequest = objectMapper.readValue(parseRequest(exchange), HttpRequest.class);
 
         HttpResponse httpResponse = handleRequest(httpRequest);
@@ -107,7 +106,6 @@ public class HttpRequestHandler implements HttpHandler {
 
     private String parseRequest(HttpExchange exchange) throws IOException {
         InputStream reqBody = exchange.getRequestBody();
-        ObjectMapper objectMapper = new ObjectMapper();
 
         return readRequestBody(reqBody);
     }

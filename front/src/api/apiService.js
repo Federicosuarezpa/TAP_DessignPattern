@@ -1,3 +1,5 @@
+import JSOn from "qs";
+
 const apiUrl = 'http://localhost:9000';
 
 const requestMethods = { get: 'GET', put: 'PUT'};
@@ -25,24 +27,28 @@ async function fetchFormData(path, { body, method }) {
 
 async function fetchApi(path, { body, method }) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
-    console.log(method);
-    var object = {};
 
-    console.log(headers);
-    body.forEach(function(value, key){
-        object[key] = value;
-    });
-    var json = object;
-    console.log(json);
-    console.log(apiUrl + path);
-    const request = await fetch(`${apiUrl}${path}`, { headers: headers, method: method, body: json });
-    const requestData = await request.json();
+    const entries = new Map([
+        ['method', 'bar']
+    ]);
 
-    if (requestData.status === 'error') {
-        throw requestData.message;
-    }
+    const datata = Object.fromEntries(entries);
+    fetch("http://localhost:9000",
+        {
+            method: "POST",
+            body: JSON.stringify(datata)
+        })
+        .then(function(res){ return res.json(); })
+        .then(function(data){ alert( JSON.stringify( data ) ) })
+    // const request = await fetch(`${apiUrl}${path}`, { headers: headers, method: method, body: json });
+    // const requestData = await request.json();
 
-    return requestData;
+    // if (requestData.status === 'error') {
+    //     throw requestData.message;
+    // }
+    //
+    // return requestData;
+    return 1;
 }
 
 export async function getOrdersInfo() {
