@@ -24,7 +24,6 @@ public class Main {
         /*
         TODO
         - Preguntar tema filtrar mensajes y hacerlo (rápido)
-        - Dynamic proxy está bien? Si no, arreglarlo
         - Tema runner (rápido)
         - Testing unit (mirar video)
         - Observer (mirar video)

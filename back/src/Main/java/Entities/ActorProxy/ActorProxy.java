@@ -12,7 +12,6 @@ public class ActorProxy implements ActorInterface {
     private final Queue<Message> queue = new LinkedBlockingDeque<>();
 
     /**
-     *
      * @param actor
      */
     public ActorProxy(Actor actor) {
@@ -20,7 +19,6 @@ public class ActorProxy implements ActorInterface {
     }
 
     /**
-     *
      * @param message
      */
     public void sendMessage(Message message) {
@@ -28,7 +26,6 @@ public class ActorProxy implements ActorInterface {
     }
 
     /**
-     *
      * @return
      */
     public Actor getActor() {
@@ -36,7 +33,6 @@ public class ActorProxy implements ActorInterface {
     }
 
     /**
-     *
      * @return Message from the queue
      * @throws InterruptedException
      */
@@ -48,23 +44,29 @@ public class ActorProxy implements ActorInterface {
     }
 
     /**
-     *
      * @param message
      */
     @Override
-    public void addMessageQueue(Message message) { queue.add(message); }
+    public void addMessageQueue(Message message) {
+        queue.add(message);
+    }
 
     /**
-     *
      * @param message
      */
     @Override
-    public void processMessage(Message message) { }
+    public void processMessage(Message message) {
+    }
 
     /**
-     *
      * @return ActorProxy's queue
      */
     @Override
-    public Queue<Message> getQueueList() { return this.queue; }
+    public Queue<Message> getQueueList() {
+        return this.queue;
+    }
+
+    @Override
+    public void notifyAllObservers(int state) {
+    }
 }
