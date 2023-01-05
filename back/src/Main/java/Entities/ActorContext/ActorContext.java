@@ -9,7 +9,6 @@ import java.util.Map;
 
 public class ActorContext {
     private final Map<String, ActorProxy> actors = new HashMap<>();
-    private int pointer = 0;
 
 
     private static final ActorContext actorContext = new ActorContext();
