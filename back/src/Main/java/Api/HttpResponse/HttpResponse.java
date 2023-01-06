@@ -1,4 +1,4 @@
-package Entities.HttpResponse;
+package Api.HttpResponse;
 
 public class HttpResponse {
     private String[] actorNames;

@@ -1,12 +1,11 @@
-package Entities.HttpRequestHandler;
+package Api.HttpRequestHandler;
 
 import Entities.ActorContext.ActorContext;
 import Entities.ActorProxy.ActorProxy;
 import Entities.HelloWorldActor.HelloWorldActor;
-import Entities.HttpRequest.HttpRequest;
-import Entities.HttpResponse.HttpResponse;
+import Api.HttpRequest.HttpRequest;
+import Api.HttpResponse.HttpResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -14,10 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class HttpRequestHandler implements HttpHandler {
     ActorContext actorContext = ActorContext.getInstance();

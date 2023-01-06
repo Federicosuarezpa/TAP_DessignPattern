@@ -18,7 +18,7 @@ public class Runner implements Runnable {
      */
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()) {
+        while (!actorThread.isInterrupted()) {
             Message message = this.actor.getQueueList().poll();
             if (message != null)
                 this.actor.processMessage(message);

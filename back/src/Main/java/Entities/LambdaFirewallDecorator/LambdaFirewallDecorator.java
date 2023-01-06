@@ -19,6 +19,12 @@ public class LambdaFirewallDecorator extends ActorDecorator {
     }
 
     @Override
+    public void addMessageQueue(Message message) {
+        if (filter.test(message.getBody())) {
+            this.getActor().addMessageQueue(message);
+        }
+    }
+    @Override
     public void processMessage(Message message) {
         if (filter.test(message.getBody())) {
             this.getActor().processMessage(message);
@@ -27,6 +33,6 @@ public class LambdaFirewallDecorator extends ActorDecorator {
 
     @Override
     public Queue<Message> getQueueList() {
-        return null;
+        return this.getActor().getQueueList();
     }
 }

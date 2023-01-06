@@ -1,4 +1,4 @@
-package Entities.HttpRequest;
+package Api.HttpRequest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

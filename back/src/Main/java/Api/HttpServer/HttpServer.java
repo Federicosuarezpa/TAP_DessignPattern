@@ -1,6 +1,6 @@
-package Entities.HttpServer;
+package Api.HttpServer;
 
-import Entities.HttpRequestHandler.HttpRequestHandler;
+import Api.HttpRequestHandler.HttpRequestHandler;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 

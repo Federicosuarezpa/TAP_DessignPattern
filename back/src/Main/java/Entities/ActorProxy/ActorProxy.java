@@ -68,5 +68,14 @@ public class ActorProxy implements ActorInterface {
 
     @Override
     public void notifyAllObservers(int state) {
+
+    }
+
+    public void start() {
+        this.getActor().start();
+    }
+
+    public void stop() {
+        this.getActor().stop();
     }
 }

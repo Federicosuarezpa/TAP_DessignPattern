@@ -47,8 +47,6 @@ public class InsultActor extends Actor {
             }
         } else if (message instanceof AddInsultMessage) {
             insults.add(message.getBody());
-        } else {
-
         }
     }
 
@@ -58,4 +56,11 @@ public class InsultActor extends Actor {
      */
     public Queue<Message> getQueueList() { return this.getQueue(); }
 
+    public List<String> getInsults() {
+        return insults;
+    }
+
+    public void setInsults(List<String> insults) {
+        this.insults = insults;
+    }
 }

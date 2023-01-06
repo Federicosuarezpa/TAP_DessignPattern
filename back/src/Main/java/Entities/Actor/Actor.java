@@ -1,7 +1,10 @@
 package Entities.Actor;
 
+import Entities.ActorContext.ActorContext;
 import Entities.ActorListener.ActorListener;
 import Entities.Message.Message;
+import Entities.Runner.Runner;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
@@ -11,6 +14,7 @@ public abstract class Actor implements ActorInterface {
     private final Queue<Message> queue = new LinkedBlockingDeque<>();
     private String name;
     private List<ActorListener> listeners = new ArrayList<>();
+    private Runner runner;
 
     /**
      * @param message
@@ -43,7 +47,6 @@ public abstract class Actor implements ActorInterface {
     /**
      * @return Actor's queue
      */
-    public abstract Queue<Message> getQueueList();
 
     public Queue<Message> getQueue() {
         return queue;
@@ -65,5 +68,21 @@ public abstract class Actor implements ActorInterface {
 
     public List<ActorListener> getListeners() {
         return listeners;
+    }
+
+    public Runner getRunner() {
+        return runner;
+    }
+
+    public void setRunner(Runner runner) {
+        this.runner = runner;
+    }
+
+    public void start() {
+        this.runner.start();
+    }
+
+    public void stop() {
+        this.runner.stop();
     }
 }

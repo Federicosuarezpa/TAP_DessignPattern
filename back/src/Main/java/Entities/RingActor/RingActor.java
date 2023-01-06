@@ -7,6 +7,10 @@ import java.util.Queue;
 
 public class RingActor extends Actor {
     private Actor nextActor;
+    private boolean flagMessageReceived = false;
+    private Integer rounds = 0;
+    private final static Integer TOTAL_ROUNDS = 100;
+
 
     /**
      *
@@ -14,7 +18,9 @@ public class RingActor extends Actor {
      */
     @Override
     public void processMessage(Message message) {
-        nextActor.addMessageQueue(message);
+        rounds = rounds + 1;
+        if (nextActor != null)
+            nextActor.addMessageQueue(message);
     }
 
     /**
@@ -24,5 +30,17 @@ public class RingActor extends Actor {
     @Override
     public Queue<Message> getQueueList() {
         return this.getQueue();
+    }
+
+    public Actor getNextActor() {
+        return nextActor;
+    }
+
+    public void setNextActor(Actor nextActor) {
+        this.nextActor = nextActor;
+    }
+
+    public boolean isAlreadyRounds() {
+        return rounds > TOTAL_ROUNDS;
     }
 }
