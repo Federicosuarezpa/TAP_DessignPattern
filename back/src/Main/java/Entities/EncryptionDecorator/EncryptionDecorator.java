@@ -26,6 +26,7 @@ public class EncryptionDecorator extends ActorDecorator {
      */
     @Override
     public void processMessage(Message message) {
+        System.out.println("1");
         this.getActor().processMessage(message);
     }
 

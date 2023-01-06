@@ -31,7 +31,6 @@ public class ActorContext {
      */
     public ActorProxy spawnActor(String name, Actor actor) {
         Runner runner = new Runner(actor);
-        runner.start();
         actor.setName(name);
         ActorProxy actorProxy = new ActorProxy(actor);
         actors.put(name, actorProxy);

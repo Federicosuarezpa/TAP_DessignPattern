@@ -2,12 +2,11 @@ package Entities.Runner;
 
 import Entities.Actor.Actor;
 import Entities.Message.Message;
+import sun.misc.SignalHandler;
 
 public class Runner implements Runnable {
     private Actor actor;
     private Thread actorThread;
-
-    Runnable shutdownHandler = () -> System.out.println("Shutting down thread..");
 
     public Runner(Actor actor) {
         this.actor = actor;
@@ -26,8 +25,7 @@ public class Runner implements Runnable {
         }
     }
     public void start() {
-        actorThread = new Thread(shutdownHandler, "shutdownthread");
-        Runtime.getRuntime().addShutdownHook(actorThread);
+        actorThread = new Thread(this);
         actorThread.start();
     }
 
