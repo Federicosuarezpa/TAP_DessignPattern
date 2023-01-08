@@ -5,7 +5,7 @@ import Entities.HelloWorldActor.HelloWorldActor;
 import Entities.Insult.GetInsultMessage;
 import Entities.InsultActor.InsultActor;
 import Entities.Message.Message;
-import Entities.PrinterObserver.PrinterObserver;
+import Entities.MoninorService.MonitorService;
 import org.junit.Test;
 import java.util.Objects;
 
@@ -46,7 +46,7 @@ public class InsultActorTest<T> {
     @Test
     public void testAddListener() {
         InsultActor insultActor = new InsultActor();
-        PrinterObserver actorLister = new PrinterObserver();
+        MonitorService actorLister = new MonitorService();
 
         assertEquals(0, insultActor.getListeners().size());
 

@@ -2,6 +2,7 @@ package Entities.Actor;
 
 import Entities.ActorContext.ActorContext;
 import Entities.ActorListener.ActorListener;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 import Entities.Runner.Runner;
 
@@ -21,6 +22,7 @@ public abstract class Actor implements ActorInterface {
      */
     @Override
     public void addMessageQueue(Message message) {
+        this.notifyAllObservers(EventType.RECEIVEDMESSAGE, message);
         queue.add(message);
     }
 
@@ -57,14 +59,21 @@ public abstract class Actor implements ActorInterface {
     }
 
     public void detach(ActorListener observer) {
-        listeners.add(observer);
+        listeners.remove(observer);
     }
 
-    public void notifyAllObservers(int state) {
+    public void notifyAllObservers(EventType eventType) {
         for (ActorListener observer : listeners) {
-            observer.update(state);
+            observer.update(eventType, this);
         }
     }
+
+    public void notifyAllObservers (EventType eventType , Message message) {
+        for (ActorListener observer : listeners) {
+            observer.update(eventType, this, message);
+        }
+    }
+
 
     public List<ActorListener> getListeners() {
         return listeners;
@@ -79,10 +88,16 @@ public abstract class Actor implements ActorInterface {
     }
 
     public void start() {
+        this.notifyAllObservers(EventType.CREATED);
         this.runner.start();
     }
 
     public void stop() {
+        this.notifyAllObservers(EventType.FINALIZATION);
         this.runner.stop();
+    }
+
+    public void messageProcessed() {
+        this.notifyAllObservers(EventType.PROCESSEDMESSAGE);
     }
 }

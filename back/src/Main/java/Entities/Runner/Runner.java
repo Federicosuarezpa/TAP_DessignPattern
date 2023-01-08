@@ -20,8 +20,10 @@ public class Runner implements Runnable {
     public void run() {
         while (!actorThread.isInterrupted()) {
             Message message = this.actor.getQueueList().poll();
-            if (message != null)
+            if (message != null) {
+                this.actor.messageProcessed();
                 this.actor.processMessage(message);
+            }
         }
     }
     public void start() {

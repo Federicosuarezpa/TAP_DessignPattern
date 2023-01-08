@@ -9,6 +9,12 @@ import Entities.InsultService.InsultService;
 import Entities.InsultService.InsultServiceInterface;
 import Entities.Message.Message;*/
 
+import Entities.ActorContext.ActorContext;
+import Entities.ActorListener.ActorListener;
+import Entities.ActorProxy.ActorProxy;
+import Entities.HelloWorldActor.HelloWorldActor;
+import Entities.Message.Message;
+import Entities.MoninorService.MonitorService;
 import Entities.PingPongActor.TestPingPongActor;
 import Entities.RingActor.RingActor;
 import Entities.RingActor.TestRingActor;
@@ -31,9 +37,19 @@ public class Main {
         /*
         TODO
         - Observer (mirar video)
-        - Ring actor / ping - pong
          */
         //TestRingActor test = new TestRingActor();
-        TestPingPongActor test = new TestPingPongActor();
+        //TestPingPongActor test = new TestPingPongActor();
+
+        ActorProxy actorProxy = ActorContext.getInstance().spawnActor("Test", new HelloWorldActor());
+        ActorProxy actorProxy2 = ActorContext.getInstance().spawnActor("Test2", new HelloWorldActor());
+
+        MonitorService.getInstance().monitorActor("Test");
+        MonitorService.getInstance().monitorActor("Test2");
+        actorProxy.start();
+        actorProxy2.start();
+        actorProxy.sendMessage(new Message(actorProxy, "hola"));
+        actorProxy.sendMessage(new Message(actorProxy, "Test"));
+        actorProxy2.sendMessage(new Message(actorProxy, "Test"));
     }
 }

@@ -30,12 +30,4 @@ public class HelloWorldActor extends Actor {
     @Override
     public Queue<Message> getQueueList() { return this.getQueue(); }
 
-    /**
-     *
-     * @param message
-     */
-    public void addMessageQueue(Message message) {
-        this.getQueue().add(message);
-    }
-
 }

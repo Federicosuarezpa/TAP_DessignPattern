@@ -2,6 +2,7 @@ package Entities.ActorProxy;
 
 import Entities.Actor.Actor;
 import Entities.Actor.ActorInterface;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;
@@ -67,9 +68,8 @@ public class ActorProxy implements ActorInterface {
     }
 
     @Override
-    public void notifyAllObservers(int state) {
-
-    }
+    public void notifyAllObservers(EventType eventType) { }
+    public void notifyAllObservers(EventType eventType, Message message) { }
 
     public void start() {
         this.getActor().start();
