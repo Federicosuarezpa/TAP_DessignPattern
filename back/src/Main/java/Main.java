@@ -9,6 +9,7 @@ import Entities.InsultService.InsultService;
 import Entities.InsultService.InsultServiceInterface;
 import Entities.Message.Message;*/
 
+import Entities.PingPongActor.TestPingPongActor;
 import Entities.RingActor.RingActor;
 import Entities.RingActor.TestRingActor;
 
@@ -32,6 +33,7 @@ public class Main {
         - Observer (mirar video)
         - Ring actor / ping - pong
          */
-        TestRingActor test = new TestRingActor();
+        //TestRingActor test = new TestRingActor();
+        TestPingPongActor test = new TestPingPongActor();
     }
 }

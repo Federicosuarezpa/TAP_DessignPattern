@@ -7,7 +7,6 @@ import java.util.Queue;
 
 public class RingActor extends Actor {
     private Actor nextActor;
-    private boolean flagMessageReceived = false;
     private Integer rounds = 0;
     private final static Integer TOTAL_ROUNDS = 100;
 
