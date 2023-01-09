@@ -3,33 +3,35 @@ package Entities.RingActor;
 import Entities.ActorContext.ActorContext;
 import Entities.ActorProxy.ActorProxy;
 import Entities.Message.Message;
+import Entities.MoninorService.MonitorService;
 
-public class TestRingActor {
-    private final static Integer ACTORS = 100;
-    public TestRingActor() throws InterruptedException {
-        this.ringActorStart();
+public class TestRingActor implements Runnable {
+    private final static Integer ACTORS = 10;
+    private Thread actorThread;
+    private RingActor actor;
+
+    public TestRingActor(RingActor ringActor) {
+        this.actor = ringActor;
     }
-
-    public void ringActorStart() throws InterruptedException {
+    public void ringActorStart(RingActor firstRingActor) {
         RingActor[] ringActors = new RingActor[ACTORS];
-        for(int i = 0; i < ACTORS; i++) {
+        ringActors[0] = firstRingActor;
+        for(int i = 1; i < ACTORS; i++) {
             ringActors[i] = new RingActor();
-            if (i == ACTORS - 1) ringActors[i].setNextActor(ringActors[0]);
-            else if (i > 0) ringActors[i].setNextActor(ringActors[i - 1]);
+            ringActors[i].getListeners().add(MonitorService.getInstance());
+            ringActors[i].setNextActor(ringActors[i - 1]);
         }
         ringActors[0].setNextActor(ringActors[ACTORS - 1]);
         ActorProxy[] actorProxies = new ActorProxy[ACTORS];
         int index = 0;
         for (RingActor ringActor: ringActors) {
-            actorProxies[index] = ActorContext.getInstance().spawnActor("Test", ringActor);
+            actorProxies[index] = ActorContext.getInstance().spawnActor(firstRingActor.getName() + - index, ringActor);
             index++;
         }
-        // Get current time
-        long start = System.currentTimeMillis();
         actorProxies[0].sendMessage(new Message(actorProxies[0], "hola"));
+        long start = System.currentTimeMillis();
         while (true) {
             if (checkFlagLastElement(ringActors[ACTORS - 1])) break;
-            Thread.sleep(1);
         }
         long elapsedTimeMillis = System.currentTimeMillis() - start;
         System.out.println(elapsedTimeMillis);
@@ -40,5 +42,21 @@ public class TestRingActor {
 
     public boolean checkFlagLastElement(RingActor ringActor) {
         return ringActor.isAlreadyRounds();
+    }
+
+    /**
+     * Checkear como hacer tema de runner
+     */
+    @Override
+    public void run() {
+        this.ringActorStart(this.actor);
+    }
+    public void start() {
+        actorThread = new Thread(this);
+        actorThread.start();
+    }
+
+    public void stop() {
+        actorThread.interrupt();
     }
 }

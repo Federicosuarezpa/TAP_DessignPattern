@@ -2,6 +2,7 @@ package Entities.InsultActor;
 
 import Entities.Actor.Actor;
 import Entities.ActorProxy.ActorProxy;
+import Entities.Enums.EventType;
 import Entities.Insult.AddInsultMessage;
 import Entities.Insult.GetAllInsultMessages;
 import Entities.Insult.GetInsultMessage;
@@ -21,6 +22,7 @@ public class InsultActor extends Actor {
      */
     @Override
     public void processMessage(Message message) {
+        this.messageProcessed();
         if (message instanceof GetInsultMessage) {
             if (insults.size() > 0) {
                 Random r = new Random();

@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/common/Header';
-import OrdersInfoPage from "./pages/OrdersInfoPage";
+import OrdersInfoPage from "./pages/ActorsInfoPage";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {

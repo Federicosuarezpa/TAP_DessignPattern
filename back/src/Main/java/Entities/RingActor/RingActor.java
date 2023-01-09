@@ -1,14 +1,16 @@
 package Entities.RingActor;
 
 import Entities.Actor.Actor;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
+import Entities.MoninorService.MonitorService;
 
 import java.util.Queue;
 
 public class RingActor extends Actor {
     private Actor nextActor;
     private Integer rounds = 0;
-    private final static Integer TOTAL_ROUNDS = 100;
+    private final static Integer TOTAL_ROUNDS = 10;
 
 
     /**
@@ -17,9 +19,14 @@ public class RingActor extends Actor {
      */
     @Override
     public void processMessage(Message message) {
-        rounds = rounds + 1;
-        if (nextActor != null)
+        if (rounds < TOTAL_ROUNDS) {
+            rounds = rounds + 1;
+            if (nextActor != null)
+                nextActor.addMessageQueue(message);
+        } else {
+            this.stop();
             nextActor.addMessageQueue(message);
+        }
     }
 
     /**
@@ -40,6 +47,7 @@ public class RingActor extends Actor {
     }
 
     public boolean isAlreadyRounds() {
-        return rounds > TOTAL_ROUNDS;
+        System.out.println(rounds);
+        return rounds >= TOTAL_ROUNDS;
     }
 }

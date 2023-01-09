@@ -1,6 +1,7 @@
 package Entities.HelloWorldActor;
 
 import Entities.Actor.Actor;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;

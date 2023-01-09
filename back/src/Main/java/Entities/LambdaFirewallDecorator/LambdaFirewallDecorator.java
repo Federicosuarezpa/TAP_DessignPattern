@@ -2,6 +2,7 @@ package Entities.LambdaFirewallDecorator;
 
 import Entities.Actor.ActorInterface;
 import Entities.ActorDecorator.ActorDecorator;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;
@@ -27,6 +28,7 @@ public class LambdaFirewallDecorator extends ActorDecorator {
     @Override
     public void processMessage(Message message) {
         if (filter.test(message.getBody())) {
+            this.messageProcessed();
             this.getActor().processMessage(message);
         }
     }

@@ -1,9 +1,12 @@
 package Api.HttpResponse;
 
+import Api.ActorInfo.ActorInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HttpResponse {
-    private String[] actorNames;
-    private String[] queue;
-    private Integer[] messagesProcessed;
+    private ArrayList<ActorInfo> actors = new ArrayList<>();
     private Integer statusCode;
     private String errorMessage = "";
 
@@ -15,52 +18,14 @@ public class HttpResponse {
         this.statusCode = statusCode;
         this.errorMessage = errorMessage;
     }
-    /**
-     *
-     * @return Names of all the actors active
-     */
-    public String[] getActorNames() {
-        return actorNames;
+
+
+    public ArrayList<ActorInfo> getActors() {
+        return actors;
     }
 
-    /**
-     *
-     * @param actorNames
-     */
-    public void setActorNames(String[] actorNames) {
-        this.actorNames = actorNames;
-    }
-
-    /**
-     *
-     * @return status of the messages processed for actors
-     */
-    public String[] getQueue() {
-        return queue;
-    }
-
-    /**
-     *
-     * @param queue
-     */
-    public void setQueue(String[] queue) {
-        this.queue = queue;
-    }
-
-    /**
-     *
-     * @return The number of messages processed by the actors
-     */
-    public Integer[] getMessagesProcessed() {
-        return messagesProcessed;
-    }
-
-    /**
-     *
-     * @param messagesProcessed
-     */
-    public void setMessagesProcessed(Integer[] messagesProcessed) {
-        this.messagesProcessed = messagesProcessed;
+    public void setActors(ArrayList<ActorInfo> actors) {
+        this.actors = actors;
     }
 
     /**

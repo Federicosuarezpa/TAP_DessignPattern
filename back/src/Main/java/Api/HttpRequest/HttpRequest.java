@@ -7,6 +7,7 @@ public class HttpRequest {
     private String nameActor = null;
     private String message = null;
     private String method = null;
+    private String actorType = null;
 
     /**
      *
@@ -54,5 +55,13 @@ public class HttpRequest {
      */
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getActorType() {
+        return actorType;
+    }
+
+    public void setActorType(String actorType) {
+        this.actorType = actorType;
     }
 }

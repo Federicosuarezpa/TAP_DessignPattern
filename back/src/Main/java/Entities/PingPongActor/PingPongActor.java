@@ -2,6 +2,7 @@ package Entities.PingPongActor;
 
 import Entities.Actor.Actor;
 import Entities.ActorContext.ActorContext;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;
@@ -16,6 +17,7 @@ public class PingPongActor extends Actor {
      */
     @Override
     public void processMessage(Message message) {
+        this.messageProcessed();
         numberOfCommunications++;
         System.out.println("Message: " + message.getBody()
                 + " From: " + message.getFrom().getActor().getName() +

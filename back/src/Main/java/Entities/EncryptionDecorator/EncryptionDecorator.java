@@ -2,6 +2,7 @@ package Entities.EncryptionDecorator;
 
 import Entities.Actor.ActorInterface;
 import Entities.ActorDecorator.ActorDecorator;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;
@@ -17,6 +18,7 @@ public class EncryptionDecorator extends ActorDecorator {
      * @param message
      */
     public void addMessageQueue(Message message) {
+        this.messageProcessed();
         this.getActor().addMessageQueue(message);
     }
 
@@ -26,7 +28,6 @@ public class EncryptionDecorator extends ActorDecorator {
      */
     @Override
     public void processMessage(Message message) {
-        System.out.println("1");
         this.getActor().processMessage(message);
     }
 

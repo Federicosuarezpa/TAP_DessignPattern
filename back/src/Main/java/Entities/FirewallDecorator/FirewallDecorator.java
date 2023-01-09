@@ -3,6 +3,7 @@ package Entities.FirewallDecorator;
 import Entities.Actor.ActorInterface;
 import Entities.ActorContext.ActorContext;
 import Entities.ActorDecorator.ActorDecorator;
+import Entities.Enums.EventType;
 import Entities.Message.Message;
 
 import java.util.Queue;
