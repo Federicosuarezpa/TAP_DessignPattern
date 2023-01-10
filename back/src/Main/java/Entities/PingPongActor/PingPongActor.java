@@ -10,6 +10,7 @@ import java.util.Queue;
 public class PingPongActor extends Actor {
     private int numberOfCommunications = 0;
     private int numberTotalCommunications = 0;
+    private static final int MILISECONDSTOSLEEP = 100;
 
     /**
      *
@@ -17,6 +18,11 @@ public class PingPongActor extends Actor {
      */
     @Override
     public void processMessage(Message message) {
+        try {
+            Thread.sleep(MILISECONDSTOSLEEP);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         this.messageProcessed();
         numberOfCommunications++;
         System.out.println("Message: " + message.getBody()
@@ -26,6 +32,8 @@ public class PingPongActor extends Actor {
                 new Message(ActorContext.getInstance().lookup(this.getName()), message.getBody()));
         if (numberOfCommunications > numberTotalCommunications) {
             this.stop();
+            message.getFrom().sendMessage(
+                    new Message(ActorContext.getInstance().lookup(this.getName()), message.getBody()));
         }
     }
 

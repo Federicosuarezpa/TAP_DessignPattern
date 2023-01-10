@@ -24,7 +24,6 @@ public class RingActor extends Actor {
             if (nextActor != null)
                 nextActor.addMessageQueue(message);
         } else {
-            this.stop();
             nextActor.addMessageQueue(message);
         }
     }

@@ -12,6 +12,7 @@ import Entities.InsultActor.InsultActor;
 import Entities.Message.Message;
 import Entities.MoninorService.MonitorService;
 import Entities.PingPongActor.PingPongActor;
+import Entities.PingPongActor.TestPingPongActor;
 import Entities.RingActor.RingActor;
 import Entities.RingActor.TestRingActor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,10 +77,12 @@ public class HttpRequestHandler implements HttpHandler {
                 for (String actorsName: actorContext.getNames()) {
                     Integer numberOfMessagesPendent = monitorService.getNumberOfMessages().get(actorsName);
                     Integer messagesProcessed = monitorService.getNumberProcessedMessages().get(actorsName);
-//                    System.out.println(messagesProcessed);
                     List<EventType> events = monitorService.getEvents().get(actorsName);
                     String status = "Running";
-                    if (events.get(events.size() - 1) == EventType.ERROR || events.get(events.size() - 1) == EventType.FINALIZATION) status = "Stopped";
+                    for (EventType event: events) {
+                        if (event == EventType.ERROR || event == EventType.FINALIZATION) status = "Stopped";
+                        if (event == EventType.CREATED) status = "Running";
+                    }
                     ActorInfo actorInfo  = new ActorInfo(actorsName, numberOfMessagesPendent, messagesProcessed, status);
                     httpResponse.getActors().add(actorInfo);
                 }
@@ -139,6 +142,12 @@ public class HttpRequestHandler implements HttpHandler {
                 TestRingActor testRingActor = new TestRingActor(ringActor);
                 testRingActor.start();
             }
+            case "PingPongActor" -> {
+                PingPongActor pingPongActor = new PingPongActor();
+                pingPongActor.setName(actorName);
+                TestPingPongActor testPingPongActor = new TestPingPongActor(pingPongActor);
+                testPingPongActor.start();
+            }
             default -> {
                 Actor actor = actorInstance(actorType);
                 actor.getListeners().add(monitorService);
@@ -151,9 +160,6 @@ public class HttpRequestHandler implements HttpHandler {
         switch (actorType) {
             case "HelloWorldActor" -> {
                 return new HelloWorldActor();
-            }
-            case "PingPongActor" -> {
-                return new PingPongActor();
             }
             case "InsultActor" -> {
                 return new InsultActor();

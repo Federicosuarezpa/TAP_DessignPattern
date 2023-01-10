@@ -26,6 +26,7 @@ import Entities.InsultService.InsultServiceInterface;
 import Entities.LambdaFirewallDecorator.LambdaFirewallDecorator;
 import Entities.Message.Message;
 import Entities.MoninorService.MonitorService;
+import Entities.PingPongActor.PingPongActor;
 import Entities.PingPongActor.TestPingPongActor;
 import Entities.RingActor.RingActor;
 import Entities.RingActor.TestRingActor;
@@ -35,9 +36,11 @@ import java.util.function.Predicate;
 public class Main {
     private final static Integer PORT = 9000;
     public static void main(String[] args) throws Throwable {
+        /*Descomentar segunda entrega (Framework -  Activar servidor)*/
         HttpServer httpServer = new HttpServer(PORT);
         httpServer.startServer();
 
+        /*Descomentar primera entrega*/
         testingFunctionsBack();
     }
 
@@ -127,6 +130,9 @@ public class Main {
         TestRingActor testRingActor = new TestRingActor(ringActor);
         testRingActor.start();
 
-        new TestPingPongActor();
+        PingPongActor pingPongActor = new PingPongActor();
+        pingPongActor.setName("Fede");
+        TestPingPongActor testPingPongActor =  new TestPingPongActor(pingPongActor);
+        testPingPongActor.start();
     }
 }
