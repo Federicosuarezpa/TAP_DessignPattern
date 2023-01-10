@@ -31,6 +31,11 @@ public class TestRingActor implements Runnable {
         actorProxies[0].sendMessage(new Message(actorProxies[0], "hola"));
         long start = System.currentTimeMillis();
         while (true) {
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             if (checkFlagLastElement(ringActors[ACTORS - 1])) break;
         }
         long elapsedTimeMillis = System.currentTimeMillis() - start;

@@ -10,7 +10,7 @@ import java.util.Queue;
 public class RingActor extends Actor {
     private Actor nextActor;
     private Integer rounds = 0;
-    private final static Integer TOTAL_ROUNDS = 10;
+    private final static Integer TOTAL_ROUNDS = 100;
 
 
     /**
@@ -47,7 +47,6 @@ public class RingActor extends Actor {
     }
 
     public boolean isAlreadyRounds() {
-        System.out.println(rounds);
         return rounds >= TOTAL_ROUNDS;
     }
 }

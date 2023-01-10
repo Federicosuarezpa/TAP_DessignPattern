@@ -22,8 +22,8 @@ public abstract class Actor implements ActorInterface {
      */
     @Override
     public void addMessageQueue(Message message) {
-        this.notifyAllObservers(EventType.RECEIVEDMESSAGE, message);
         queue.add(message);
+        this.notifyAllObservers(EventType.RECEIVEDMESSAGE, message);
     }
 
     /**

@@ -48,6 +48,7 @@ public class MonitorService implements ActorListener{
         for (String name : actorsNames) {
             ActorProxy users = actorContext.lookup(name);
             users.getActor().getListeners().add(this);
+            if (numberOfMessages.get(name) == null) initializeListActor(name);
         }
     }
 

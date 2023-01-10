@@ -7,7 +7,7 @@ import Entities.Message.Message;
 public class TestPingPongActor {
     private final static Integer NUMBERCOMMUNICATIONS = 100;
 
-    public TestPingPongActor() throws InterruptedException {
+    public TestPingPongActor() {
         this.pingPongActorStart();
     }
 
